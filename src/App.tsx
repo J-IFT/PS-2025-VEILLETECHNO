@@ -130,7 +130,7 @@ function App() {
         const subreddits = getSubreddits();
         const promises = subreddits.map(async subreddit => {
           try {
-            const response = await fetch(`https://www.reddit.com/r/${subreddit}/hot.json?limit=5`);
+            const response = await fetch(`/reddit/r/${subreddit}/hot.json?limit=5`);
             if (!response.ok) {
               console.warn(`Failed to fetch from r/${subreddit}: ${response.status}`);
               return [];
