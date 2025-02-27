@@ -7,7 +7,11 @@ module.exports = function(app) {
       target: 'https://www.reddit.com',
       changeOrigin: true,
       pathRewrite: {
-        '^/api': '', // Retirer '/api' de l'URL pour envoyer directement la requête à Reddit
+        '^/api': '', // Supprimer '/api' pour faire passer directement la requête à Reddit
+      },
+      onProxyReq: (proxyReq, req, res) => {
+        // Ajouter des en-têtes pour éviter les problèmes CORS si nécessaire
+        proxyReq.setHeader('Origin', 'https://www.reddit.com');
       },
     })
   );
