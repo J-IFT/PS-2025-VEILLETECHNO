@@ -130,7 +130,9 @@ function App() {
         const subreddits = getSubreddits();
         const promises = subreddits.map(async subreddit => {
           try {
-            const response = await fetch(`/reddit/r/${subreddit}/hot.json?limit=5`);
+            //test ci dessous via vercel pour eviter le cors et lerreur fetch
+            const response = await fetch(`https://www.reddit.com/r/${subreddit}/hot.json?limit=2`);
+            // ca marche via localhost const response = await fetch(`/reddit/r/${subreddit}/hot.json?limit=5`);
             if (!response.ok) {
               console.warn(`Failed to fetch from r/${subreddit}: ${response.status}`);
               return [];
