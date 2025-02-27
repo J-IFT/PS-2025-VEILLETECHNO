@@ -18,6 +18,11 @@ Il/Elle utilise un outil de veille (Feedly, Netvibes, Google Allert...)
 Il/Elle analyse et synthétise les informations collectées tant en langues anglaise qu’en française
 Il/Elle rédige et diffuse les informations à valeur ajoutée permettant d’anticiper des technologies innovantes : Intelligence Artificielle, robotique, IOT, blockchain, informatique quantique... (Vulgarisation des nouveautés liées à l’informatique dans différents secteurs d’activité)
 
+### 🐱 Notre projet :
+Une app web hébergée via Vercel.
+La première partie traite sur les sujets : Intelligence Artificielle, Robotique, Internet des Objets et Blockchain. Via Reddit.
+La deuxième partie traite sur les sujets : Artificial Intelligence et Toute la veille technique. Via RSS APP.
+
 ### 💻 Applications et langages utilisés :
 
 + Visual studio code
