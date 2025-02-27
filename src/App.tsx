@@ -121,6 +121,8 @@ function App() {
     const category = categories.find(cat => cat.id === selectedCategory);
     return category ? category.subreddits : ['technology'];
   };
+  // Fonction de délai
+  const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
   // Requête Reddit avec gestion d'erreur améliorée
   const { data: posts = [], isLoading, isError } = useQuery({
@@ -130,6 +132,8 @@ function App() {
         const subreddits = getSubreddits();
         const promises = subreddits.map(async subreddit => {
           try {
+            //éviter l'erreur 429
+            await delay(2000);
             //test ci dessous via vercel pour eviter le cors et lerreur fetch
             const response = await fetch(`https://www.reddit.com/r/${subreddit}/hot.json?limit=2`);
             // ca marche via localhost const response = await fetch(`/reddit/r/${subreddit}/hot.json?limit=5`);
