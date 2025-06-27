@@ -36,26 +36,11 @@ function App() {
       nameEn: 'Artificial Intelligence',
       icon: <Brain className="w-6 h-6" />,
       subreddits: [
-        'artificial',
-        'MachineLearning',
-        'deeplearning',
-        'mlscaling',
-        'AINews',
-        'OpenAI',
-        'ChatGPT',
-        'LocalLLaMA',
-        'singularity',
-        'computervision',
-        'LanguageTechnology',
-        'reinforcementlearning',
-        'ArtificialIntelligence',
-        'MLQuestions',
-        'datascience',
-        'statistics',
-        'NLP',
-        'neuralnetworks',
-        'AutoML',
-        'MLOps'
+        'MachineLearning',       // Très actif, discussions et publications ML
+        'deeplearning',          // Orienté Deep Learning pur
+        'ArtificialIntelligence',// Généraliste et très vivant
+        'OpenAI',                // Actualité sur GPT, ChatGPT, etc.
+        'MLOps'                  // DevOps appliqué à l’IA
       ]
     },
     {
@@ -64,66 +49,24 @@ function App() {
     nameEn: 'Cybersecurity',
     icon: <ShieldCheck className="w-6 h-6" />,
     subreddits: [
-      'cybersecurity',
-        'netsec',
-        'AskNetsec',
-        'SecurityCareerAdvice',
-        'InfoSec',
-        'hacking',
-        'HowToHack',
-        'blackhat',
-        'whitehat',
-        'pwned',
-        'malware',
-        'ReverseEngineering',
-        'crypto',
-        'cryptography',
-        'privacy',
-        'opsec',
-        'computerforensics',
-        'AskNetSec',
-        'securityCTF',
-        'bugbounty',
-        'redteamsec',
-        'blueteamsec',
-        'sysadmin',
-        'ITCareerQuestions'
-    ]
-  },
+        'cybersecurity',         // Le principal, très pro
+        'netsec',                // Sécurité réseau, très actif
+        'malware',               // Veille sur les virus, menaces
+        'securityCTF',           // Compétitions et exercices de sécurité
+        'blueteamsec'            // Défense, SOC, logs etc.
+      ]
+    },
   {
     id: 'governance',
     name: 'Gouvernance SI',
     nameEn: 'IT Governance',
     icon: <DatabaseZap className="w-6 h-6" />,
     subreddits: [
-      'ITManagement',
-        'sysadmin',
-        'ITCareerQuestions',
-        'businessanalysis',
-        'projectmanagement',
-        'agile',
-        'scrum',
-        'devops',
-        'ITSMProfessionals',
-        'ITIL',
-        'ITAudit',
-        'ITCompliance',
-        'ITRisk',
-        'CIO',
-        'ITStrategy',
-        'digitaltransformation',
-        'enterprisearchitecture',
-        'ITGovernance',
-        'ITLeadership',
-        'TechManagement',
-        'ITBusiness',
-        'ITConsulting',
-        'ITSecurity',
-        'DataGovernance',
-        'CloudComputing',
-        'aws',
-        'AZURE',
-        'googlecloud'
+      'ITManagement',          // Bon niveau stratégique
+      'ITGovernance',          // Directement dans le thème
+      'devops',                // Bonne intersection Dev + gouvernance
+      'projectmanagement',     // Classique mais utile
+      'CloudComputing'         // Sujet transversal : infra + stratégie
     ]
   },
   {
@@ -132,28 +75,11 @@ function App() {
     nameEn: 'Green IT',
     icon: <Leaf className="w-6 h-6" />,
     subreddits: [
-      'sustainability',
-        'environment',
-        'ClimateChange',
-        'renewable',
-        'solar',
-        'energy',
-        'greentech',
-        'CleanTech',
-        'sustainability',
-        'ZeroWaste',
-        'Futurology',
-        'technology',
-        'ElectricVehicles',
-        'TeslaMotors',
-        'batteries',
-        'SmartGrid',
-        'greenbuilding',
-        'circulareconomy',
-        'carbonfootprint',
-        'climatetech',
-        'ESG',
-        'SustainableTech'
+      'greentech',             // Orienté tech verte
+      'CleanTech',             // Startup, innovation
+      'sustainability',        // Pratiques responsables (énergie, carbone)
+      'SmartGrid',             // Infrastructure intelligente
+      'climatetech'            // Innovation et lutte contre le réchauffement
     ]
   }
   ];
@@ -171,7 +97,10 @@ function App() {
         'coding',
         'compsci',
         'softwareengineering',
-        'cybersecurity',
+        'ITCareerQuestions',
+        'sysadmin',
+        'digitaltransformation',
+        'CloudComputing',
         ...categories.flatMap(cat => cat.subreddits)
       ];
     }
