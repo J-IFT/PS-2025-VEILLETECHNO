@@ -28,9 +28,9 @@ Mettre en place un dispositif de veille technologique en français et en anglais
 ### 🐱 Notre projet :
 Une app web hébergée via Vercel.
 
-La première partie traite sur les sujets : Intelligence Artificielle, Robotique, Internet des Objets et Blockchain. Via Reddit. En anglais principalement. Sources : diverses.
+La première partie traite sur les sujets : Intelligence Artificielle, GreenIT, GouvernanceSI et Cybersécurité. Via Reddit. En anglais principalement. Sources : diverses.
 
-La deuxième partie traite sur les sujets : Programmation et Intelligence artificielle. Via RSS APP. En français principalement pour la programmation et en anglais principalement pour l'IA. Sources : diverses.
+La deuxième partie traite sur les sujets : GreenIT et Intelligence artificielle. Via RSS APP. En français principalement pour la programmation et en anglais principalement pour l'IA. Sources : diverses.
 
 La troisième partie traite sur le sujet : Sécurité. Via Elfsight. Source : Le monde informatique.
 
