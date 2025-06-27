@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, BookMarked, TrendingUp, Brain, Notebook as Robot, Database, Radio, Presentation as PresentationChart, ExternalLink, MessageSquare, ArrowBigUp, ShieldCheck, DatabaseZap, Leaf } from 'lucide-react';
+import { Search, BookMarked, TrendingUp, Brain, Notebook as Robot, Database, Radio, Presentation as PresentationChart, ExternalLink, MessageSquare, ArrowBigUp, Shield, Settings, Leaf } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { formatDistanceToNow } from 'date-fns';
 import { fr, enUS } from 'date-fns/locale';
@@ -36,52 +36,51 @@ function App() {
       nameEn: 'Artificial Intelligence',
       icon: <Brain className="w-6 h-6" />,
       subreddits: [
-        'MachineLearning',       // Très actif, discussions et publications ML
-        'deeplearning',          // Orienté Deep Learning pur
-        'ArtificialIntelligence',// Généraliste et très vivant
-        'OpenAI',                // Actualité sur GPT, ChatGPT, etc.
-        'MLOps'                  // DevOps appliqué à l’IA
+        'artificial',
+        'MachineLearning',
+        'OpenAI',
+        'ChatGPT'
       ]
     },
     {
-    id: 'cybersecurity',
-    name: 'Cybersécurité',
-    nameEn: 'Cybersecurity',
-    icon: <ShieldCheck className="w-6 h-6" />,
-    subreddits: [
-        'cybersecurity',         // Le principal, très pro
-        'netsec',                // Sécurité réseau, très actif
-        'malware',               // Veille sur les virus, menaces
-        'securityCTF',           // Compétitions et exercices de sécurité
-        'blueteamsec'            // Défense, SOC, logs etc.
+      id: 'cybersecurity',
+      name: 'Cybersécurité',
+      nameEn: 'Cybersecurity',
+      icon: <Shield className="w-6 h-6" />,
+      subreddits: [
+        'cybersecurity',
+        'netsec',
+        'InfoSec',
+        'ReverseEngineering',
+        'privacy'
       ]
     },
-  {
-    id: 'governance',
-    name: 'Gouvernance SI',
-    nameEn: 'IT Governance',
-    icon: <DatabaseZap className="w-6 h-6" />,
-    subreddits: [
-      'ITManagement',          // Bon niveau stratégique
-      'ITGovernance',          // Directement dans le thème
-      'devops',                // Bonne intersection Dev + gouvernance
-      'projectmanagement',     // Classique mais utile
-      'CloudComputing'         // Sujet transversal : infra + stratégie
-    ]
-  },
-  {
-    id: 'greenit',
-    name: 'Green IT',
-    nameEn: 'Green IT',
-    icon: <Leaf className="w-6 h-6" />,
-    subreddits: [
-      'greentech',             // Orienté tech verte
-      'CleanTech',             // Startup, innovation
-      'sustainability',        // Pratiques responsables (énergie, carbone)
-      'SmartGrid',             // Infrastructure intelligente
-      'climatetech'            // Innovation et lutte contre le réchauffement
-    ]
-  }
+    {
+      id: 'governance',
+      name: 'Gouvernance SI',
+      nameEn: 'IT Governance',
+      icon: <Settings className="w-6 h-6" />,
+      subreddits: [
+        'ITManagement',
+        'devops',
+        'projectmanagement',
+        'CloudComputing',
+        'ITStrategy'
+      ]
+    },
+    {
+      id: 'greenit',
+      name: 'Green IT',
+      nameEn: 'Green IT',
+      icon: <Leaf className="w-6 h-6" />,
+      subreddits: [
+        'sustainability',
+        'ClimateChange',
+        'greentech',
+        'CleanTech',
+        'ZeroWaste'
+      ]
+    }
   ];
 
   // Fonction pour obtenir les subreddits en fonction de la catégorie sélectionnée
@@ -93,14 +92,7 @@ function App() {
         'tech',
         'technews',
         'TechNewsToday',
-        'programming',
-        'coding',
-        'compsci',
-        'softwareengineering',
-        'ITCareerQuestions',
-        'sysadmin',
-        'digitaltransformation',
-        'CloudComputing',
+        'cybersecurity',
         ...categories.flatMap(cat => cat.subreddits)
       ];
     }
