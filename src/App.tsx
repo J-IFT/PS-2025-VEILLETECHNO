@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, BookMarked, TrendingUp, Brain, Notebook as Robot, Database, Radio, Presentation as PresentationChart, ExternalLink, MessageSquare, ArrowBigUp } from 'lucide-react';
+import { Search, BookMarked, TrendingUp, Brain, Notebook as Robot, Database, Radio, Presentation as PresentationChart, ExternalLink, MessageSquare, ArrowBigUp, ShieldCheck, DatabaseZap, Leaf } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { formatDistanceToNow } from 'date-fns';
 import { fr, enUS } from 'date-fns/locale';
@@ -49,56 +49,41 @@ function App() {
       ]
     },
     {
-      id: 'robotics',
-      name: 'Robotique',
-      nameEn: 'Robotics',
-      icon: <Robot className="w-6 h-6" />,
-      subreddits: [
-        'robotics',
-        'Automate',
-        'ROS',
-        'IndustrialAutomation',
-        'roboticengineering',
-        'cobotics',
-        'drones',
-        'autonomous',
-        'manufacturing'
-      ]
-    },
-    {
-      id: 'iot',
-      name: 'Internet des Objets',
-      nameEn: 'Internet of Things',
-      icon: <Radio className="w-6 h-6" />,
-      subreddits: [
-        'IOT',
-        'InternetOfThings',
-        'esp8266',
-        'esp32',
-        'arduino',
-        'raspberry_pi',
-        'homeautomation',
-        'smarthome',
-        'industrialiot'
-      ]
-    },
-    {
-      id: 'blockchain',
-      name: 'Blockchain',
-      nameEn: 'Blockchain',
-      icon: <Database className="w-6 h-6" />,
-      subreddits: [
-        'blockchain',
-        'CryptoTechnology',
-        'ethereum',
-        'web3',
-        'smartcontracts',
-        'defi',
-        'BlockchainNews',
-        'BlockchainStartups',
-        'hyperledger'
-      ]
-    }
+    id: 'cybersecurity',
+    name: 'Cybersécurité',
+    nameEn: 'Cybersecurity',
+    icon: <ShieldCheck className="w-6 h-6" />,
+    subreddits: [
+      'cybersecurity',
+      'netsec',
+      'hacking',
+      'ReverseEngineering',
+      'security'
+    ]
+  },
+  {
+    id: 'governance',
+    name: 'Gouvernance SI',
+    nameEn: 'IT Governance',
+    icon: <DatabaseZap className="w-6 h-6" />,
+    subreddits: [
+      'sysadmin',
+      'itmanager',
+      'devops',
+      'networking'
+    ]
+  },
+  {
+    id: 'greenit',
+    name: 'Green IT',
+    nameEn: 'Green IT',
+    icon: <Leaf className="w-6 h-6" />,
+    subreddits: [
+      'sustainability',
+      'techforgood',
+      'LowTech'
+    ]
+  }
   ];
 
   // Fonction pour obtenir les subreddits en fonction de la catégorie sélectionnée
