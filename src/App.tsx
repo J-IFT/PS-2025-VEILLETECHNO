@@ -84,8 +84,8 @@ function App() {
   ];
 
   // Fonction pour obtenir les subreddits en fonction de la catégorie sélectionnée
-  const getSubreddits = () => {
-    if (selectedCategory === 'all') {
+  const getSubreddits = (category: string) => {
+    if (category === 'all') {
       return [
         'technology',
         'Futurology',
@@ -96,9 +96,10 @@ function App() {
         ...categories.flatMap(cat => cat.subreddits)
       ];
     }
-    const category = categories.find(cat => cat.id === selectedCategory);
-    return category ? category.subreddits : ['technology'];
+    const categoryObj = categories.find(cat => cat.id === category);
+    return categoryObj ? categoryObj.subreddits : ['technology'];
   };
+
   // Fonction de délai
   const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -107,15 +108,16 @@ function App() {
     queryKey: ['redditPosts', selectedCategory],
     queryFn: async () => {
       try {
-        const subreddits = getSubreddits();
-        const promises = subreddits.map(async subreddit => {
+        const subreddits = getSubreddits(selectedCategory);
+        console.log(`Fetching posts for category: ${selectedCategory}, subreddits:`, subreddits);
+        
+        const promises = subreddits.map(async (subreddit, index) => {
           try {
-            //éviter l'erreur 429
-            await delay(2000);
-            // pour éviter le CORS et le FETCH marche partiellement mais solution à trouver
+            // Délai progressif pour éviter l'erreur 429
+            await delay(index * 100);
+            
             const response = await fetch(`https://www.reddit.com/r/${subreddit}/hot.json?limit=2`);
-            // ca marche via localhost 
-            // const response = await fetch(`/reddit/r/${subreddit}/hot.json?limit=5`);
+            
             if (!response.ok) {
               console.warn(`Failed to fetch from r/${subreddit}: ${response.status}`);
               return [];
@@ -134,6 +136,8 @@ function App() {
         const results = await Promise.all(promises);
         const validPosts = results.flat().filter(post => post !== null);
         
+        console.log(`Fetched ${validPosts.length} posts for category: ${selectedCategory}`);
+        
         // Trier par date de création (plus récent en premier)
         return validPosts.sort((a, b) => b.created_utc - a.created_utc);
       } catch (error) {
@@ -141,10 +145,10 @@ function App() {
         throw new Error('Failed to fetch posts');
       }
     },
-    retry: 3, // Réessayer 3 fois en cas d'échec
-    retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000), // Délai exponentiel
-    staleTime: 5 * 60 * 1000, // Considérer les données comme fraîches pendant 5 minutes
-    refetchOnWindowFocus: false // Ne pas rafraîchir automatiquement lors du focus de la fenêtre
+    retry: 3,
+    retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000),
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false
   });
 
   const filteredPosts = (posts as RedditPost[]).filter(post =>
@@ -157,6 +161,11 @@ function App() {
       addSuffix: true,
       locale: language === 'fr' ? fr : enUS
     });
+  };
+
+  const handleCategoryChange = (categoryId: string) => {
+    console.log(`Changing category from ${selectedCategory} to ${categoryId}`);
+    setSelectedCategory(categoryId);
   };
 
   return (
@@ -184,6 +193,11 @@ function App() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Debug info - à supprimer en production */}
+        <div className="mb-4 p-2 bg-blue-50 rounded text-sm text-blue-700">
+          Catégorie active: {selectedCategory} | Posts chargés: {posts.length} | Posts filtrés: {filteredPosts.length}
+        </div>
+
         {/* Search and Filters */}
         <div className="mb-8">
           <div className="relative">
@@ -199,35 +213,35 @@ function App() {
         </div>
 
         {/* Categories */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
           <button
-            onClick={() => setSelectedCategory('all')}
-            className={`p-4 rounded-lg border ${
+            onClick={() => handleCategoryChange('all')}
+            className={`p-4 rounded-lg border transition-all duration-200 ${
               selectedCategory === 'all'
-                ? 'bg-indigo-50 border-indigo-500'
-                : 'bg-white border-gray-200 hover:border-indigo-500'
+                ? 'bg-indigo-100 border-indigo-500 text-indigo-700 shadow-md'
+                : 'bg-white border-gray-200 hover:border-indigo-300 hover:bg-indigo-50'
             }`}
           >
             <div className="flex items-center space-x-3">
               <TrendingUp className="w-6 h-6" />
               <span className="font-medium">
-                {language === 'fr' ? 'Toutes les technologies' : 'All Technologies'}
+                {language === 'fr' ? 'Toutes' : 'All'}
               </span>
             </div>
           </button>
           {categories.map((category) => (
             <button
               key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`p-4 rounded-lg border ${
+              onClick={() => handleCategoryChange(category.id)}
+              className={`p-4 rounded-lg border transition-all duration-200 ${
                 selectedCategory === category.id
-                  ? 'bg-indigo-50 border-indigo-500'
-                  : 'bg-white border-gray-200 hover:border-indigo-500'
+                  ? 'bg-indigo-100 border-indigo-500 text-indigo-700 shadow-md'
+                  : 'bg-white border-gray-200 hover:border-indigo-300 hover:bg-indigo-50'
               }`}
             >
               <div className="flex items-center space-x-3">
                 {category.icon}
-                <span className="font-medium">
+                <span className="font-medium text-sm">
                   {language === 'fr' ? category.name : category.nameEn}
                 </span>
               </div>
